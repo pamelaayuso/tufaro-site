@@ -24,48 +24,76 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:   #1B365D;
-      --navy-light: #243f6e;
-      --navy-dark:  #122444;
-      --gold:   #C4A35A;
-      --gold-light: #d4b870;
-      --gold-dark:  #a8883e;
-      --white:  #FFFFFF;
-      --off-white: #F8F7F4;
-      --gray-100: #F3F4F6;
-      --gray-200: #E5E7EB;
-      --gray-500: #6B7280;
-      --gray-700: #374151;
-      --red-soft: #FEF2F2;
-      --red-main: #DC2626;
-      --green-soft: #F0FDF4;
-      --green-main: #16A34A;
-      --radius: 16px;
-      --radius-sm: 10px;
-      --shadow: 0 4px 24px rgba(27,54,93,0.10);
-      --shadow-lg: 0 8px 40px rgba(27,54,93,0.16);
+      --teal:        #01696F;
+      --teal-dark:   #015559;
+      --teal-light:  #e6f4f4;
+      --navy:        #1B3A4B;
+      --gold:        #C9993A;
+      --white:       #FFFFFF;
+      --bg:          #F4F9F9;
+      --text-muted:  #5a7a8a;
+      --gray-200:    #E5E7EB;
+      --gray-100:    #F3F4F6;
+      --gray-700:    #374151;
+      --red-soft:    rgba(220,38,38,0.06);
+      --red-main:    #DC2626;
+      --radius:      16px;
+      --radius-sm:   10px;
+      --shadow:      0 4px 24px rgba(1,105,111,0.10);
+      --shadow-lg:   0 8px 48px rgba(1,105,111,0.16);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background: var(--off-white);
-      color: var(--gray-700);
+      background: var(--bg);
+      color: var(--navy);
       min-height: 100vh;
       line-height: 1.5;
     }
 
+    /* ─── Navbar ─── */
+    .navbar {
+      background: var(--white);
+      border-bottom: 1px solid rgba(27,58,75,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 20px;
+    }
+    .navbar .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      height: 64px;
+    }
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--navy);
+    }
+    .navbar-wordmark {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: -0.01em;
+    }
+
     /* ─── Language Toggle ─── */
     .lang-bar {
-      background: var(--navy-dark);
+      background: var(--teal-dark);
       padding: 8px 20px;
       display: flex;
       justify-content: flex-end;
       align-items: center;
       gap: 8px;
     }
-    .lang-bar span { color: var(--gray-200); font-size: 12px; }
+    .lang-bar span { color: rgba(255,255,255,0.7); font-size: 12px; }
     .lang-btn {
       background: none;
       border: 1px solid rgba(255,255,255,0.3);
@@ -81,7 +109,7 @@
     .lang-btn.active {
       background: var(--gold);
       border-color: var(--gold);
-      color: var(--navy-dark);
+      color: var(--white);
     }
     .lang-btn:not(.active):hover {
       border-color: var(--gold);
@@ -90,8 +118,8 @@
 
     /* ─── Hero Header ─── */
     .hero {
-      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, var(--navy-light) 100%);
-      padding: 40px 20px 48px;
+      background: linear-gradient(135deg, #e8f5f5 0%, #f0fafa 40%, #f8fcfc 100%);
+      padding: 48px 20px 56px;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -102,7 +130,7 @@
       top: -60px; right: -60px;
       width: 240px; height: 240px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,163,90,0.15), transparent 70%);
+      background: radial-gradient(circle, rgba(1,105,111,0.10), transparent 70%);
     }
     .hero::after {
       content: '';
@@ -110,45 +138,42 @@
       bottom: -80px; left: -40px;
       width: 300px; height: 300px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,163,90,0.08), transparent 70%);
+      background: radial-gradient(circle, rgba(201,153,58,0.08), transparent 70%);
     }
 
-    .logo-badge {
+    .section-pill {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(196,163,90,0.3);
+      background: var(--teal-light);
+      color: var(--teal);
       border-radius: 50px;
-      padding: 6px 16px;
-      margin-bottom: 24px;
-    }
-    .logo-badge .lighthouse { font-size: 18px; }
-    .logo-badge .brand-name {
-      font-size: 14px;
+      padding: 6px 18px;
+      font-size: 12px;
       font-weight: 700;
-      color: var(--gold);
-      letter-spacing: 0.05em;
       text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
     }
 
     .hero h1 {
       font-size: clamp(24px, 6vw, 38px);
       font-weight: 900;
-      color: var(--white);
+      color: var(--navy);
       line-height: 1.15;
       margin-bottom: 14px;
       position: relative;
       z-index: 1;
     }
     .hero h1 .highlight {
-      color: var(--gold);
-      display: inline-block;
+      color: var(--teal);
     }
 
     .hero-sub {
       font-size: clamp(14px, 3.5vw, 17px);
-      color: rgba(255,255,255,0.72);
+      color: var(--text-muted);
       max-width: 480px;
       margin: 0 auto 28px;
       position: relative;
@@ -159,40 +184,41 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(220,38,38,0.2);
-      border: 1px solid rgba(220,38,38,0.4);
+      background: rgba(220,38,38,0.10);
+      border: 1px solid rgba(220,38,38,0.25);
       border-radius: 50px;
       padding: 6px 16px;
       font-size: 12px;
       font-weight: 600;
-      color: #FCA5A5;
+      color: var(--red-main);
       position: relative;
       z-index: 1;
     }
     .urgency-badge .dot {
       width: 7px; height: 7px;
-      background: #F87171;
+      background: var(--red-main);
       border-radius: 50%;
       animation: pulse 1.8s ease-in-out infinite;
     }
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.4); }
+      50% { opacity: 0.4; transform: scale(1.4); }
     }
 
-    /* ─── Main Card ─── */
+    /* ─── Main Container ─── */
     .container {
       max-width: 520px;
       margin: 0 auto;
       padding: 0 16px 48px;
     }
 
+    /* ─── Main Card ─── */
     .card {
       background: var(--white);
       border-radius: var(--radius);
       box-shadow: var(--shadow-lg);
       padding: 32px 28px;
-      margin-top: -20px;
+      margin-top: -24px;
       position: relative;
       z-index: 2;
     }
@@ -207,7 +233,7 @@
     }
     .input-hint {
       font-size: 13px;
-      color: var(--gray-500);
+      color: var(--text-muted);
       margin-bottom: 14px;
     }
 
@@ -222,7 +248,7 @@
       transform: translateY(-50%);
       font-size: 22px;
       font-weight: 700;
-      color: var(--navy);
+      color: var(--teal);
       pointer-events: none;
     }
     .amount-input {
@@ -236,12 +262,12 @@
       outline: none;
       font-family: inherit;
       transition: border-color 0.2s, box-shadow 0.2s;
-      background: var(--off-white);
+      background: var(--bg);
     }
     .amount-input::placeholder { color: var(--gray-200); }
     .amount-input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(196,163,90,0.15);
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(1,105,111,0.12);
       background: var(--white);
     }
 
@@ -261,15 +287,15 @@
       border-radius: 8px;
       font-size: 13px;
       font-weight: 600;
-      color: var(--gray-700);
+      color: var(--navy);
       cursor: pointer;
       font-family: inherit;
       transition: all 0.15s;
       text-align: center;
     }
     .qp-btn:hover, .qp-btn.active {
-      background: var(--navy);
-      border-color: var(--navy);
+      background: var(--teal);
+      border-color: var(--teal);
       color: var(--white);
     }
 
@@ -296,7 +322,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: var(--gray-500);
+      color: var(--text-muted);
       margin-bottom: 16px;
     }
 
@@ -310,7 +336,8 @@
 
     .impact-card {
       background: var(--red-soft);
-      border: 1.5px solid rgba(220,38,38,0.15);
+      border: 1.5px solid var(--teal);
+      border-top: 4px solid var(--teal);
       border-radius: var(--radius-sm);
       padding: 16px 14px;
       text-align: center;
@@ -322,7 +349,7 @@
       letter-spacing: 0.07em;
       color: var(--red-main);
       margin-bottom: 6px;
-      opacity: 0.8;
+      opacity: 0.9;
     }
     .impact-card .ic-value {
       font-size: 26px;
@@ -339,8 +366,8 @@
 
     /* Lost weeks card */
     .lost-weeks-card {
-      background: linear-gradient(135deg, #FFF7ED, #FEF3C7);
-      border: 1.5px solid rgba(196,163,90,0.3);
+      background: linear-gradient(135deg, #FFF7ED, #FEFCE8);
+      border: 1.5px solid rgba(201,153,58,0.30);
       border-radius: var(--radius-sm);
       padding: 18px 16px;
       text-align: center;
@@ -353,12 +380,12 @@
       color: var(--navy);
       line-height: 1.4;
     }
-    .lost-weeks-card .lw-text span { color: var(--gold-dark); }
+    .lost-weeks-card .lw-text span { color: var(--gold); }
 
     /* Faro savings card */
     .faro-card {
-      background: var(--green-soft);
-      border: 1.5px solid rgba(22,163,74,0.2);
+      background: var(--teal-light);
+      border: 1.5px solid var(--teal);
       border-radius: var(--radius-sm);
       padding: 18px 16px;
       display: flex;
@@ -366,26 +393,21 @@
       gap: 12px;
       margin-bottom: 28px;
     }
-    .faro-card .fc-icon {
-      font-size: 28px;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .faro-card .fc-body {}
+    .faro-card .fc-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
     .faro-card .fc-title {
       font-size: 14px;
       font-weight: 700;
-      color: var(--green-main);
+      color: var(--teal-dark);
       margin-bottom: 4px;
     }
     .faro-card .fc-desc {
       font-size: 13px;
-      color: #166534;
+      color: var(--teal-dark);
       line-height: 1.5;
     }
     .faro-card .fc-desc strong { font-weight: 700; }
 
-    /* ─── Buttons ─── */
+    /* ─── Buttons (pill style matching main site) ─── */
     .btn-row {
       display: flex;
       flex-direction: column;
@@ -398,11 +420,11 @@
       justify-content: center;
       gap: 8px;
       width: 100%;
-      padding: 17px 20px;
-      border-radius: var(--radius-sm);
+      padding: 14px 28px;
+      border-radius: 50px;
       font-family: inherit;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 600;
       cursor: pointer;
       border: none;
       text-decoration: none;
@@ -422,13 +444,13 @@
     .btn-whatsapp:active { transform: translateY(0); }
 
     .btn-faro {
-      background: var(--gold);
-      color: var(--navy-dark);
+      background: var(--teal);
+      color: var(--white);
     }
     .btn-faro:hover {
-      background: var(--gold-light);
+      background: var(--teal-dark);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(196,163,90,0.4);
+      box-shadow: 0 6px 20px rgba(1,105,111,0.30);
     }
     .btn-faro:active { transform: translateY(0); }
 
@@ -437,8 +459,8 @@
     /* ─── Info Banner ─── */
     .info-banner {
       margin-top: 24px;
-      background: rgba(27,54,93,0.05);
-      border-left: 4px solid var(--navy);
+      background: rgba(1,105,111,0.06);
+      border-left: 4px solid var(--teal);
       border-radius: 0 8px 8px 0;
       padding: 14px 16px;
       font-size: 13px;
@@ -447,24 +469,29 @@
     }
     .info-banner strong { font-weight: 700; }
 
-    /* ─── Footer / Disclaimer ─── */
+    /* ─── Footer ─── */
     footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.7);
       text-align: center;
-      padding: 24px 20px 32px;
+      padding: 36px 20px 40px;
       font-size: 11px;
-      color: var(--gray-500);
       line-height: 1.7;
-      max-width: 520px;
-      margin: 0 auto;
     }
-    footer .tagline {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-      margin-bottom: 10px;
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
     }
-    footer .tagline span { color: var(--gold); }
-    footer a { color: var(--navy); text-decoration: underline; }
+    .footer-wordmark {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.01em;
+    }
+    footer a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+    footer a:hover { color: var(--white); }
 
     /* ─── Responsive tweaks ─── */
     @media (max-width: 380px) {
@@ -477,6 +504,24 @@
 
 <body>
 
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="https://tufaro.io">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 48" height="40" width="50" aria-hidden="true">
+          <polygon points="4,46 48,46 42,34 10,34" fill="#1B3A4B"/>
+          <polygon points="10,34 42,34 32,12 20,12" fill="#1B3A4B"/>
+          <rect x="16" y="8" width="20" height="4" rx="1" fill="#1B3A4B"/>
+          <rect x="19" y="1" width="14" height="7" rx="1" fill="#1B3A4B"/>
+          <rect x="22" y="3" width="8" height="4" rx="0.5" fill="#FFFFFF"/>
+          <polygon points="26,0 18,1 34,1" fill="#1B3A4B"/>
+          <polygon points="33,2 60,0 60,12" fill="#C9993A"/>
+        </svg>
+        <span class="navbar-wordmark">Tu<span style="color:#01696F">Faro</span></span>
+      </a>
+    </div>
+  </nav>
+
   <!-- Language Toggle -->
   <div class="lang-bar">
     <span id="lang-label">Idioma:</span>
@@ -486,9 +531,9 @@
 
   <!-- Hero -->
   <header class="hero">
-    <div class="logo-badge">
-      <span class="lighthouse">🔦</span>
-      <span class="brand-name">Tu Faro</span>
+    <div class="section-pill">
+      <span>⚠️</span>
+      <span id="urgency-text">Propuesta activa en el Congreso de EE.UU.</span>
     </div>
     <h1 id="hero-title">
       ¿Cuánto te quitaría el <span class="highlight">impuesto del 5%</span> a tus remesas?
@@ -498,7 +543,7 @@
     </p>
     <div class="urgency-badge">
       <span class="dot"></span>
-      <span id="urgency-text">Propuesta activa en el Congreso de EE.UU.</span>
+      <span id="urgency-sub-text">En debate ahora mismo</span>
     </div>
   </header>
 
@@ -598,7 +643,18 @@
 
   <!-- Footer -->
   <footer>
-    <div class="tagline">🔦 Tu Faro — <span>El faro que guía tu dinero a casa</span></div>
+    <div class="footer-brand">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 48" height="36" width="45" aria-hidden="true">
+        <polygon points="4,46 48,46 42,34 10,34" fill="rgba(255,255,255,0.85)"/>
+        <polygon points="10,34 42,34 32,12 20,12" fill="rgba(255,255,255,0.85)"/>
+        <rect x="16" y="8" width="20" height="4" rx="1" fill="rgba(255,255,255,0.85)"/>
+        <rect x="19" y="1" width="14" height="7" rx="1" fill="rgba(255,255,255,0.85)"/>
+        <rect x="22" y="3" width="8" height="4" rx="0.5" fill="#1B3A4B"/>
+        <polygon points="26,0 18,1 34,1" fill="rgba(255,255,255,0.85)"/>
+        <polygon points="33,2 60,0 60,12" fill="#C9993A"/>
+      </svg>
+      <span class="footer-wordmark">TuFaro</span>
+    </div>
     <div id="disclaimer">Esta calculadora es solo informativa. Las tasas y políticas pueden cambiar. Faro no es un servicio de transferencia de dinero.</div>
   </footer>
 
@@ -610,44 +666,46 @@
     // ─── Translations ───
     const T = {
       es: {
-        'lang-label':      'Idioma:',
-        'hero-title':      '¿Cuánto te quitaría el <span class="highlight">impuesto del 5%</span> a tus remesas?',
-        'hero-sub':        'Calcula en segundos cuánto dinero extra pagarías — y cuánto podrías ahorrar en cambio.',
-        'urgency-text':    'Propuesta activa en el Congreso de EE.UU.',
-        'input-label':     '¿Cuánto envías al mes a Honduras?',
-        'input-hint':      'Escribe la cantidad en dólares que normalmente envías',
-        'result-title':    '💸 Tu impacto estimado',
-        'label-monthly':   'Por mes',
-        'sub-monthly':     'extra en impuesto',
-        'label-yearly':    'Por año',
-        'sub-yearly':      'que pierdes',
-        'faro-title':      'Con Faro ya ahorras',
-        'faro-desc':       'Los usuarios de Faro ahorran en promedio <strong>$8 por envío</strong> al comparar proveedores. Mientras el impuesto te cobra más, Faro te devuelve más.',
-        'share-text':      'Compartir con amigos',
-        'compare-text':    'Compara proveedores ahora',
-        'info-title':      '¿Qué es este impuesto?',
-        'info-body':       'Una propuesta en el Congreso de EE.UU. gravaría con un <strong>5%</strong> todas las transferencias de dinero al exterior. Si se aprueba, cada $200 que envíes costaría $10 más — dinero que sale de tu bolsillo.',
-        'disclaimer':      'Esta calculadora es solo informativa. Las tasas y políticas pueden cambiar. Faro no es un servicio de transferencia de dinero.',
+        'lang-label':       'Idioma:',
+        'hero-title':       '¿Cuánto te quitaría el <span class="highlight">impuesto del 5%</span> a tus remesas?',
+        'hero-sub':         'Calcula en segundos cuánto dinero extra pagarías — y cuánto podrías ahorrar en cambio.',
+        'urgency-text':     'Propuesta activa en el Congreso de EE.UU.',
+        'urgency-sub-text': 'En debate ahora mismo',
+        'input-label':      '¿Cuánto envías al mes a Honduras?',
+        'input-hint':       'Escribe la cantidad en dólares que normalmente envías',
+        'result-title':     '💸 Tu impacto estimado',
+        'label-monthly':    'Por mes',
+        'sub-monthly':      'extra en impuesto',
+        'label-yearly':     'Por año',
+        'sub-yearly':       'que pierdes',
+        'faro-title':       'Con Faro ya ahorras',
+        'faro-desc':        'Los usuarios de Faro ahorran en promedio <strong>$8 por envío</strong> al comparar proveedores. Mientras el impuesto te cobra más, Faro te devuelve más.',
+        'share-text':       'Compartir con amigos',
+        'compare-text':     'Compara proveedores ahora',
+        'info-title':       '¿Qué es este impuesto?',
+        'info-body':        'Una propuesta en el Congreso de EE.UU. gravaría con un <strong>5%</strong> todas las transferencias de dinero al exterior. Si se aprueba, cada $200 que envíes costaría $10 más — dinero que sale de tu bolsillo.',
+        'disclaimer':       'Esta calculadora es solo informativa. Las tasas y políticas pueden cambiar. Faro no es un servicio de transferencia de dinero.',
       },
       en: {
-        'lang-label':      'Language:',
-        'hero-title':      'How much would the <span class="highlight">5% remittance tax</span> cost you?',
-        'hero-sub':        'Calculate in seconds how much extra you\'d pay — and how much you could save instead.',
-        'urgency-text':    'Active proposal in the U.S. Congress',
-        'input-label':     'How much do you send to Honduras per month?',
-        'input-hint':      'Enter the dollar amount you typically send',
-        'result-title':    '💸 Your estimated impact',
-        'label-monthly':   'Per month',
-        'sub-monthly':     'extra in tax',
-        'label-yearly':    'Per year',
-        'sub-yearly':      'you\'d lose',
-        'faro-title':      'With Faro you already save',
-        'faro-desc':       'Faro users save an average of <strong>$8 per transfer</strong> by comparing providers. While the tax charges you more, Faro gets you more.',
-        'share-text':      'Share with friends',
-        'compare-text':    'Compare providers now',
-        'info-title':      'What is this tax?',
-        'info-body':       'A proposal in the U.S. Congress would impose a <strong>5%</strong> fee on all money transfers abroad. If passed, every $200 you send would cost $10 more — straight out of your pocket.',
-        'disclaimer':      'This calculator is for informational purposes only. Rates and policies may change. Faro is not a money transfer service.',
+        'lang-label':       'Language:',
+        'hero-title':       'How much would the <span class="highlight">5% remittance tax</span> cost you?',
+        'hero-sub':         'Calculate in seconds how much extra you\'d pay — and how much you could save instead.',
+        'urgency-text':     'Active proposal in the U.S. Congress',
+        'urgency-sub-text': 'In debate right now',
+        'input-label':      'How much do you send to Honduras per month?',
+        'input-hint':       'Enter the dollar amount you typically send',
+        'result-title':     '💸 Your estimated impact',
+        'label-monthly':    'Per month',
+        'sub-monthly':      'extra in tax',
+        'label-yearly':     'Per year',
+        'sub-yearly':       'you\'d lose',
+        'faro-title':       'With Faro you already save',
+        'faro-desc':        'Faro users save an average of <strong>$8 per transfer</strong> by comparing providers. While the tax charges you more, Faro gets you more.',
+        'share-text':       'Share with friends',
+        'compare-text':     'Compare providers now',
+        'info-title':       'What is this tax?',
+        'info-body':        'A proposal in the U.S. Congress would impose a <strong>5%</strong> fee on all money transfers abroad. If passed, every $200 you send would cost $10 more — straight out of your pocket.',
+        'disclaimer':       'This calculator is for informational purposes only. Rates and policies may change. Faro is not a money transfer service.',
       }
     };
 
@@ -664,7 +722,6 @@
         if (el) el.innerHTML = html;
       }
 
-      // Re-render dynamic content if amount set
       if (currentAmount > 0) renderResults(currentAmount);
     }
 
@@ -673,7 +730,6 @@
       const input = document.getElementById('amount-input');
       const val = parseFloat(input.value);
 
-      // Update quick-pick highlights
       document.querySelectorAll('.qp-btn').forEach(btn => {
         btn.classList.toggle('active', parseFloat(btn.textContent.replace('$','')) === val);
       });
@@ -696,13 +752,11 @@
       const weeksLost = (yearly / amount).toFixed(1);
       const isEn      = currentLang === 'en';
 
-      // Format currency
       const fmt = n => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
 
       document.getElementById('val-monthly').textContent = fmt(monthly);
       document.getElementById('val-yearly').textContent  = fmt(yearly);
 
-      // "Lost weeks" message
       const weeksNum = parseFloat(weeksLost);
       let lostMsg;
       if (isEn) {
@@ -745,20 +799,18 @@
     // ─── Share ───
     function shareWhatsApp() {
       if (currentAmount <= 0) return;
-      const yearly    = (currentAmount * 0.05 * 12).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
-      const isEn      = currentLang === 'en';
+      const yearly = (currentAmount * 0.05 * 12).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+      const isEn   = currentLang === 'en';
       let msg;
       if (isEn) {
         msg = `Did you know that if the 5% remittance tax passes, I'd lose $${yearly} a year? Use this calculator to see how much you'd lose: https://tufaro.io/impuesto`;
       } else {
         msg = `¿Sabías que si se aprueba el impuesto del 5% a remesas, yo perdería $${yearly} al año? Usa esta calculadora para ver cuánto perderías tú: https://tufaro.io/impuesto`;
       }
-      const url = 'https://wa.me/?text=' + encodeURIComponent(msg);
-      window.open(url, '_blank');
+      window.open('https://wa.me/?text=' + encodeURIComponent(msg), '_blank');
     }
 
     // ─── Init ───
-    // Auto-focus input on load
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('amount-input').focus();
     });
