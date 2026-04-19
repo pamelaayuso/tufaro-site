@@ -169,6 +169,14 @@
       max-width: 480px;
     }
     .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-trust-note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      display: flex; align-items: center; gap: 6px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
 
     /* WhatsApp Chat Mockup */
     .hero-visual { position: relative; z-index: 1; }
@@ -460,6 +468,7 @@
       }
       .hero-ctas { justify-content: center; }
       .hero-tagline { justify-content: center; }
+      .hero-trust-note { justify-content: center; }
       .hero h1 { font-size: 2.4rem; }
       .hero-sub { margin: 0 auto 36px; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -512,6 +521,7 @@
           </a>
           <a href="#como-funciona" class="btn btn-outline btn-lg">Ver cómo funciona ↓</a>
         </div>
+        <p class="hero-trust-note">🔒 Gratis · Sin registros · Sin datos bancarios</p>
       </div>
 
       <div class="hero-visual">
@@ -633,8 +643,20 @@
         <p class="section-sub">Faro compara en tiempo real para que nunca pagues de más.</p>
       </div>
       <div class="comparison-wrap">
-        <div class="comparison-amount">
-          💵 Ejemplo: $300 USD enviados a Honduras
+        <!-- Interactive amount input -->
+        <div class="comparison-input-row">
+          <label for="sendAmount">💵 ¿Cuánto envías?</label>
+          <div class="amount-input-wrap">
+            <span class="amount-prefix">$</span>
+            <input type="number" id="sendAmount" value="300" min="10" max="5000" step="10" />
+            <span class="amount-suffix">USD</span>
+          </div>
+          <div class="amount-quick-btns">
+            <button onclick="setAmount(100)">$100</button>
+            <button onclick="setAmount(200)">$200</button>
+            <button onclick="setAmount(300)" class="active">$300</button>
+            <button onclick="setAmount(500)">$500</button>
+          </div>
         </div>
         <table class="comparison-table">
           <thead>
@@ -648,15 +670,21 @@
           <tbody>
             <tr>
               <td>Comisión</td>
-              <td class="col-best">$3.99</td>
-              <td>$3.99</td>
-              <td>$8.99</td>
+              <td class="col-best" id="fee-remitly">$3.99</td>
+              <td id="fee-worldremit">$3.99</td>
+              <td id="fee-wu">$8.99</td>
             </tr>
             <tr>
-              <td>Recibes (en $300)</td>
-              <td class="col-best" style="font-weight:700;color:var(--teal)">L7,850</td>
-              <td>L7,830</td>
-              <td style="color:#c0392b">L7,190</td>
+              <td>Recibes</td>
+              <td class="col-best" style="font-weight:700;color:var(--teal)" id="recv-remitly">L7,850</td>
+              <td id="recv-worldremit">L7,830</td>
+              <td style="color:#c0392b" id="recv-wu">L7,190</td>
+            </tr>
+            <tr>
+              <td>Ahorras vs WU</td>
+              <td class="col-best" style="font-weight:700;color:var(--teal)" id="save-remitly">L660</td>
+              <td id="save-worldremit">L640</td>
+              <td style="color:#c0392b">—</td>
             </tr>
             <tr>
               <td>Velocidad</td>
@@ -666,16 +694,93 @@
             </tr>
             <tr>
               <td></td>
-              <td class="col-best"><span class="badge-best">✅ Más rápido</span></td>
+              <td class="col-best"><span class="badge-best">✅ Mejor opción</span></td>
               <td><span class="badge-best">✅ Buena opción</span></td>
               <td><span class="badge-worst">❌ Más caro</span></td>
             </tr>
           </tbody>
         </table>
         <p class="comparison-note" style="margin-top:14px;color:#e67e22;font-weight:600;">⚠️ Wise temporalmente suspendido para Honduras. Actualizamos cuando reactive.</p>
-        <!-- Updated disclaimer -->
         <p class="comparison-note">Tasas referenciales — actualizado abril 2026. <a href="https://wa.me/12182741557" target="_blank" rel="noopener" style="color:var(--teal);text-decoration:underline;">Escríbenos por WhatsApp</a> para ver la tasa de hoy.</p>
       </div>
+
+      <style>
+        .comparison-input-row {
+          display: flex; flex-direction: column; align-items: center; gap: 12px;
+          margin-bottom: 24px;
+        }
+        .comparison-input-row label {
+          font-weight: 700; font-size: 1rem; color: var(--navy);
+        }
+        .amount-input-wrap {
+          display: flex; align-items: center;
+          background: white; border: 2px solid var(--teal);
+          border-radius: 50px; overflow: hidden;
+          box-shadow: var(--shadow);
+        }
+        .amount-prefix, .amount-suffix {
+          padding: 10px 16px; font-weight: 700;
+          color: var(--teal); font-size: 1.1rem;
+          background: var(--teal-light);
+        }
+        #sendAmount {
+          border: none; outline: none;
+          font-size: 1.4rem; font-weight: 800;
+          color: var(--navy); text-align: center;
+          width: 100px; padding: 10px 4px;
+          font-family: 'Inter', sans-serif;
+          -moz-appearance: textfield;
+        }
+        #sendAmount::-webkit-outer-spin-button,
+        #sendAmount::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .amount-quick-btns {
+          display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+        }
+        .amount-quick-btns button {
+          border: 1.5px solid var(--teal); background: white;
+          color: var(--teal); border-radius: 50px;
+          padding: 6px 16px; font-size: 0.88rem; font-weight: 600;
+          cursor: pointer; transition: all 0.15s ease;
+          font-family: 'Inter', sans-serif;
+        }
+        .amount-quick-btns button:hover,
+        .amount-quick-btns button.active {
+          background: var(--teal); color: white;
+        }
+      </style>
+
+      <script>
+        const rates = {
+          remitly:    { fee: 3.99, rate: 26.55 },
+          worldremit: { fee: 3.99, rate: 26.48 },
+          wu:         { fee: 8.99, rate: 26.10 }
+        };
+        function fmt(n) { return 'L' + Math.round(n).toLocaleString('es-HN'); }
+        function fmtFee(f) { return '$' + f.toFixed(2); }
+        function calcRecv(amount, provider) {
+          return (amount - rates[provider].fee) * rates[provider].rate;
+        }
+        function update() {
+          const amount = parseFloat(document.getElementById('sendAmount').value) || 300;
+          const recvR = calcRecv(amount, 'remitly');
+          const recvW = calcRecv(amount, 'worldremit');
+          const recvWU = calcRecv(amount, 'wu');
+          document.getElementById('recv-remitly').textContent    = fmt(recvR);
+          document.getElementById('recv-worldremit').textContent = fmt(recvW);
+          document.getElementById('recv-wu').textContent         = fmt(recvWU);
+          document.getElementById('save-remitly').textContent    = fmt(recvR - recvWU);
+          document.getElementById('save-worldremit').textContent = fmt(recvW - recvWU);
+          // Fees stay fixed regardless of amount for these providers
+        }
+        function setAmount(val) {
+          document.getElementById('sendAmount').value = val;
+          document.querySelectorAll('.amount-quick-btns button').forEach(b => {
+            b.classList.toggle('active', parseInt(b.textContent.replace('$','')) === val);
+          });
+          update();
+        }
+        document.getElementById('sendAmount').addEventListener('input', update);
+      </script>
     </div>
   </section>
 
@@ -693,7 +798,7 @@
         </svg>
         Chatea con Faro ahora
       </a>
-      <p class="final-cta-note">Gratis. Por WhatsApp. Sin registros.</p>
+      <p class="final-cta-note">🔒 Gratis · Sin registros · Sin datos bancarios</p>
     </div>
   </section>
 
@@ -719,6 +824,7 @@
         </div>
         <p class="footer-copy">© 2026 Faro. Todos los derechos reservados.</p>
         <p class="footer-disclaimer">Faro no es un banco ni un servicio de transferencia. Somos un comparador de tarifas. Las tasas mostradas son referenciales y pueden variar.</p>
+        <p class="footer-disclaimer" style="margin-top:8px;">Faro gana una pequeña comisión cuando eliges un proveedor a través de nuestros enlaces. Esto no afecta el precio que pagas ni el orden de los resultados. Siempre ves el precio real.</p>
       </div>
     </div>
   </footer>
